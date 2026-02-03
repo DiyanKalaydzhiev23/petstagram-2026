@@ -5,4 +5,7 @@ app_name = 'common'
 
 urlpatterns = [
     path('', views.home_page, name='home'),
+    path('<int:photo_pk>/like/', views.like_functionality, name='like'),
+    path('<int:photo_pk>/share/', views.share_functionality, name='share'),
+    path('<int:photo_pk>/comment/', views.add_comment, name='add-comment'),
 ]
