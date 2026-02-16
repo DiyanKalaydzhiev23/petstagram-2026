@@ -34,6 +34,12 @@ ALLOWED_HOSTS = [
     "gator-causal-monthly.ngrok-free.app",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1",
+    "http://localhost",
+    "https://gator-causal-monthly.ngrok-free.app",
+]
+
 
 PROJECT_APPS = [
     'accounts',
