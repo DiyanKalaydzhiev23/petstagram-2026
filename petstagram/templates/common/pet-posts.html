@@ -2,7 +2,7 @@
     <div class="top">
         <!-- User Details and image location -->
         <div class="userDetails">
-            <a href="profile details">
+            <a href="{% url 'accounts:details' request.user.pk %}">
                 <div class="profilepic">
                     <div class="profile_img">
                         <div class="image">
@@ -12,9 +12,9 @@
                 </div>
             </a>
             <h3>
-                <a href="profile details">
+                <a href="{% url 'accounts:details' request.user.pk %}">
                     <!-- if user has first name and last name -->
-                    Diyan Kalaydzhiev
+                    {{ request.user.profile.get_full_name }}
                     <!-- else -->
                     <!-- user username -->
                 </a>
@@ -22,7 +22,7 @@
                 <!-- if the photo has location -->
                 <span>{{ photo.location }}</span>
             </h3>
-            {% if editable %}
+            {% if editable and request.user == photo.user %}
                 <div class="edit-delete-btns">
     
                     <!-- Link to Edit Pet Photo Page -->
@@ -52,7 +52,7 @@
             <div class="left">
                     <span class="heart">
                         <a href="{% url 'common:like' photo.pk %}">
-                            {% if photo.like_set.count %}
+                            {% if photo.is_liked_by_user %}
                                 <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
                             {% else %}
                                 <i class="fa-regular fa-heart"></i>
@@ -101,7 +101,7 @@
                                 <p>
                                     <!-- Link to User Profile Details Page-->
                                     <!-- User First and/or Last Name or username-->
-                                    <a href="">Steven Ivanov</a>
+                                    <a href="">{{ request.user.profile.get_full_name }}</a>
                                     <!-- User Comment -->
                                     - {{ comment.text }}
                                 </p>

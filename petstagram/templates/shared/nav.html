@@ -29,34 +29,33 @@
                         <i>Add Photo</i>
                     </a>
                 </li>
-                <li class="nav-item">
-
-                    <!-- Link to Login Page -->
-                    <a href="{% url 'accounts:login' %}">
-                        <i>Login</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-
-                    <!-- Link to Register Page -->
-                    <a href="{% url 'accounts:register' %}">
-                        <i>Register</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-
-                    <!-- Link to Profile Page -->
-                    <a href="">
-                        <i>Profile</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-
-                    <!-- Lpg out -->
-                    <a href="#">
-                        <i>Log out</i>
-                    </a>
-                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <!-- Link to Profile Page -->
+                        <a href="{% url 'accounts:details' request.user.pk %}">
+                            <i>Profile</i>
+                        </a>
+                    </li>
+                    <form action="{% url 'accounts:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="button"><i>Logout</i></button>
+                    </form>
+                {% else %}
+                    <li class="nav-item">
+    
+                        <!-- Link to Login Page -->
+                        <a href="{% url 'accounts:login' %}">
+                            <i>Login</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+    
+                        <!-- Link to Register Page -->
+                        <a href="{% url 'accounts:register' %}">
+                            <i>Register</i>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
